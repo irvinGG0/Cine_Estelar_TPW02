@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // ===== 1. Resaltar página activa en menú =====
     const enlaces = document.querySelectorAll('nav a');
     const rutaActual = window.location.pathname.split('/').pop();
-    
+
     enlaces.forEach(enlace => {
         enlace.classList.remove('activo');
         const destino = enlace.getAttribute('href');
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.title.includes('Inicio')) {
         const hora = new Date().getHours();
         let saludo, emoji;
-        
+
         if (hora >= 5 && hora < 12) {
             saludo = '¡Buenos días! Disfruta tu película ☀️';
             emoji = '🌅';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             emoji = '🌙';
         }
 
-        const encabezado = document.querySelector('header');
+        const encabezado = document.querySelector('main');
         if (encabezado) {
             const cajaSaludo = document.createElement('div');
             cajaSaludo.style.cssText = `
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 font-weight: bold;
             `;
             cajaSaludo.innerHTML = `${emoji} ${saludo}`;
-            encabezado.appendChild(cajaSaludo);
+            encabezado.insertBefore(cajaSaludo, encabezado.firstChild);
         }
     }
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const peliculas = document.querySelectorAll('.lista-peliculas .pelicula');
 
     botonesFiltro.forEach(boton => {
-        boton.addEventListener('click', function() {
+        boton.addEventListener('click', function () {
             // Quitar clase activa a todos
             botonesFiltro.forEach(b => b.classList.remove('filtro-activo'));
             this.classList.add('filtro-activo');
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== 4. Formulario de Contacto =====
     const formulario = document.querySelector('form');
     if (formulario) {
-        formulario.addEventListener('submit', function(e) {
+        formulario.addEventListener('submit', function (e) {
             e.preventDefault(); // ⚠️ Esto es clave: evita que recargue la página
 
             // Obtener valores
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Mensaje según el asunto
             let mensajeExito = '';
-            switch(asunto) {
+            switch (asunto) {
                 case 'reclamo':
                     mensajeExito = `✅ Estimado/a ${nombre},\nHemos recibido tu reclamo. Lo revisaremos con atención y te responderemos en un máximo de 48 horas. Gracias por ayudarnos a mejorar.`;
                     break;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Mostrar mensaje
             alert(mensajeExito);
-            
+
             // Limpiar formulario
             formulario.reset();
         });
@@ -132,11 +132,59 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.body.appendChild(botonArriba);
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         botonArriba.style.opacity = window.scrollY > 300 ? '1' : '0';
     });
 
-    botonArriba.addEventListener('click', function() {
+    botonArriba.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
+(function () {
+    const carrusel = document.querySelector('.carrusel');
+    if (!carrusel) return; // en las otras paginas no hay carrusel
+
+    const pista = carrusel.querySelector('.pista');
+    const total = pista.children.length;
+    const contIndicadores = carrusel.querySelector('.indicadores');
+    const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let actual = 0;
+    let timer;
+
+    // Un indicador por cada slide
+    for (let i = 0; i < total; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Ir al banner ' + (i + 1));
+        b.addEventListener('click', function () { irA(i); reiniciar(); });
+        contIndicadores.appendChild(b);
+    }
+    const indicadores = contIndicadores.children;
+
+    function irA(n) {
+        actual = (n + total) % total; // al pasar el ultimo vuelve al primero
+        pista.style.transform = 'translateX(-' + (actual * 100) + '%)';
+        for (let i = 0; i < total; i++) {
+            indicadores[i].classList.toggle('activo', i === actual);
+        }
+    }
+
+    function iniciar() {
+        if (reducirMovimiento) return;
+        timer = setInterval(function () { irA(actual + 1); }, 4000); // 4000 ms = 4 segundos
+    }
+    function detener() { clearInterval(timer); }
+    function reiniciar() { detener(); iniciar(); }
+
+    carrusel.querySelector('.next').addEventListener('click', function () { irA(actual + 1); reiniciar(); });
+    carrusel.querySelector('.prev').addEventListener('click', function () { irA(actual - 1); reiniciar(); });
+
+    // Pausa cuando el mouse esta encima o el teclado tiene el foco dentro
+    carrusel.addEventListener('mouseenter', detener);
+    carrusel.addEventListener('mouseleave', iniciar);
+    carrusel.addEventListener('focusin', detener);
+    carrusel.addEventListener('focusout', iniciar);
+
+    irA(0);
+    iniciar();
+})();

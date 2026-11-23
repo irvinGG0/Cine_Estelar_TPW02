@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio — Cine Estelar</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
     <header>
         <h1> CINE ESTELAR </h1>
@@ -18,33 +20,113 @@
         </nav>
     </header>
 
-    <main>
+    <!-- ===== CARRUSEL DE BANNERS (NUEVO) ===== -->
+    <section class="carrusel" aria-label="Banners destacados">
+        <div class="ventana">
+            <div class="pista">
+                <div class="slide slide-1">
+                    <div>
+                        <h2></h2>
+                        <p></p>
+                        <a href="cartelera.html">Ver cartelera</a>
+                    </div>
+                </div>
+                <div class="slide slide-2">
+                    <div>
+                        <h2>Toy Story 5</h2>
+                        <p>Woody, Buzz y la pandilla regresan con una nueva aventura.</p>
+                        <a href="cartelera.html">Ver horarios</a>
+                    </div>
+                </div>
+                <div class="slide slide-3">
+                    <div>
+                        <h2>Spider-Man: Brand new day</h2>
+                        <p>Peter Parker enfrenta
+                            un nuevo comienzo...
+                        </p>
+                        <a href="cartelera.html">Ver horarios</a>
+                    </div>
+                </div>
+                <div class="slide slide-4">
+                    <div>
+                        <h2>Promociones especiales</h2>
+                        <p>2x1 los martes, descuento para estudiantes y combo familiar.</p>
+                        <a href="precios.html">Ver precios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="flecha prev" aria-label="Banner anterior">&#10094;</button>
+        <button type="button" class="flecha next" aria-label="Banner siguiente">&#10095;</button>
+
+        <div class="indicadores"></div>
+    </section>
+    <!-- ===== FIN DEL CARRUSEL ===== -->
+
+    <main class="inicio">
         <section class="bienvenida">
             <h2>🎬 Bienvenidos</h2>
-            <p>Disfruta de las mejores películas en pantalla grande. Aquí encontrarás toda la información de nuestra cartelera, horarios, promociones y mucho más.</p>
+            <p>Disfruta de las mejores películas en pantalla grande. Aquí encontrarás toda la información de nuestra
+                cartelera, horarios, promociones y mucho más.</p>
         </section>
 
         <section class="destacadas">
             <h2>⭐ Películas Destacadas</h2>
+
             <article class="pelicula-destacada" data-genero="terror">
-                <img src="cine/insidious.jpg" alt="Insidious — La Puerta Roja" loading="lazy">
-                <h3>Insidious: La Puerta Roja</h3>
-                <p><strong>Género:</strong> Terror | <strong>Duración:</strong> 107 min</p>
-                <p>La familia Lambert enfrenta su último y más aterrador desafío...</p>
+                <div class="poster">
+                    <img src="cine/insidious.jpg" alt="Insidious — La Puerta Roja" loading="lazy">
+                    <span class="duracion">107 min</span>
+                </div>
+                <div class="info">
+                    <h3>Insidious: La Puerta Roja</h3>
+                    <p class="genero">Terror</p>
+                    <p>La familia Lambert enfrenta su último y más aterrador desafío...</p>
+                </div>
             </article>
 
             <article class="pelicula-destacada" data-genero="animacion">
-                <img src="cine/toy store.jpg" alt="Toy Story 5" loading="lazy">
-                <h3>Toy Story 5</h3>
-                <p><strong>Género:</strong> Animación / Aventura | <strong>Duración:</strong> 95 min</p>
-                <p>Woody, Buzz y la pandilla regresan con una nueva aventura emocionante...</p>
+                <div class="poster">
+                    <img src="cine/rocky.jpg" alt="Rocky" loading="lazy">
+                    <span class="duracion">145 min</span>
+                </div>
+                <div class="info">
+                    <h3>Yo soy Rocky</h3>
+                    <p class="genero">Acción</p>
+                    <p>Rechazado por todos, un actor en la ruina lo apuesta
+                        todo por su propio guion para cambiar la historia del cine
+                    </p>
+                </div>
             </article>
 
             <article class="pelicula-destacada" data-genero="accion">
-                <img src="cine/spiderman.jpg" alt="Spider-Man" loading="lazy">
-                <h3>Spider-Man: Cruzando el Multiverso</h3>
-                <p><strong>Género:</strong> Acción / Animación | <strong>Duración:</strong> 140 min</p>
-                <p>Miles Morales viaja por el Multiverso y conoce a un equipo de Spiders...</p>
+                <div class="poster">
+                    <img src="cine/spiderman.jpg" alt="Spider-Man" loading="lazy">
+                    <span class="duracion">140 min</span>
+                </div>
+                <div class="info">
+                    <h3>Spider-Man: Brand new day</h3>
+                    <p class="genero">Acción / Animación</p>
+                    <p>En una ciudad que olvidó su nombre, Peter Parker enfrenta
+                        un nuevo comienzo y una peligrosa
+                        evolución como Spider-Man.
+                    </p>
+            </article>
+
+            <article class="pelicula-destacada" data-genero="accion">
+                <div class="poster">
+                    <img src="cine/dune.jpg" alt="Dune" loading="lazy">
+                    <span class="duracion">140 min</span>
+                </div>
+                <div class="info">
+                    <h3>Dune: Part Three </h3>
+                    <p class="genero">Acción / Animación</p>
+                    <p>En la cima de un imperio marcado por la guerra santa,
+                        Paul Atreides enfrenta traiciones internas y
+                        el verdadero precio del poder absoluto
+                    </p>
+                </div>
             </article>
         </section>
 
@@ -81,9 +163,11 @@
                 <p>Email: contacto@cineestelar.pe</p>
             </div>
         </div>
-        <p class="derechos">&copy; 2026 Cine Estelar — Todos los derechos reservados | Proyecto Taller de Programación Web</p>
+        <p class="derechos">&copy; 2026 Cine Estelar — Todos los derechos reservados | Proyecto Taller de Programación
+            Web</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
