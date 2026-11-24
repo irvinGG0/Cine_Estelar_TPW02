@@ -71,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===== 4. Formulario de Contacto =====
     const formulario = document.querySelector('form');
     if (formulario) {
+        // Teléfono: solo números y máximo 9 dígitos (también al pegar texto)
+        const campoTelefono = document.getElementById('telefono');
+        if (campoTelefono) {
+            campoTelefono.addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '').slice(0, 9);
+            });
+        }
+
         formulario.addEventListener('submit', function (e) {
             e.preventDefault(); // ⚠️ Esto es clave: evita que recargue la página
 
@@ -88,6 +96,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!correo.includes('@') || !correo.includes('.')) {
                 alert('⚠️ Escribe un correo válido (ej: nombre@dominio.com)');
+                return;
+            }
+
+            // El teléfono es opcional, pero si lo escriben debe tener 9 dígitos
+            const telefono = document.getElementById('telefono')?.value.trim();
+            if (telefono && !/^\d{9}$/.test(telefono)) {
+                alert('⚠️ El teléfono debe tener exactamente 9 dígitos (ej: 987654321)');
                 return;
             }
 
@@ -184,6 +199,20 @@ document.addEventListener('DOMContentLoaded', function () {
     carrusel.addEventListener('mouseleave', iniciar);
     carrusel.addEventListener('focusin', detener);
     carrusel.addEventListener('focusout', iniciar);
+
+    // Deslizar con el dedo en el celular
+    let inicioX = 0;
+    carrusel.addEventListener('touchstart', function (e) {
+        inicioX = e.touches[0].clientX;
+        detener();
+    }, { passive: true });
+    carrusel.addEventListener('touchend', function (e) {
+        const diferencia = e.changedTouches[0].clientX - inicioX;
+        if (Math.abs(diferencia) > 40) {
+            irA(actual + (diferencia < 0 ? 1 : -1));
+        }
+        reiniciar();
+    }, { passive: true });
 
     irA(0);
     iniciar();
