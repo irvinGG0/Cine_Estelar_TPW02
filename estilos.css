@@ -395,6 +395,7 @@ textarea:focus-visible {
 .carrusel .slide-2 {
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15)), url("cine/ToySto.jpg");
 }
+
 .carrusel .slide-3 {
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15)), url("cine/banner2.jpg");
 }
@@ -743,5 +744,97 @@ main.inicio .bienvenida {
 
     .carrusel .indicadores button {
         width: 28px;
+    }
+}
+
+/* ===== LOGO + ENLACE AL INICIO ===== */
+.marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.marca:hover {
+    color: #ffe14d;
+    text-decoration: none;
+}
+
+.marca img {
+    display: block;
+    width: auto;
+    height: 45px;
+    /* cambia este valor para agrandar o achicar el logo */
+    max-width: none;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .marca {
+        gap: 8px;
+    }
+
+    .marca img {
+        height: 34px;
+    }
+}
+
+/* ===== CARTELERA: PROXIMAMENTE ===== */
+#avengers-doomsday {
+    scroll-margin-top: 120px;
+    /* para que el encabezado fijo no tape el titulo */
+}
+
+.proximamente {
+    display: block;
+    /* anula la rejilla general: aqui la tarjeta ocupa todo el ancho */
+}
+
+.estreno {
+    display: flex;
+    /* afiche a la izquierda, datos a la derecha */
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0;
+    overflow: hidden;
+    border-left: 4px solid #e94560;
+}
+
+.estreno img {
+    flex-shrink: 0;
+    /* el afiche no se encoge */
+    width: 280px;
+    /* ancho del afiche */
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    aspect-ratio: 2 / 3;
+    /* proporcion de afiche vertical */
+    object-fit: cover;
+}
+
+.estreno .info-pelicula {
+    flex: 1;
+    /* ocupa el resto del ancho */
+    padding: 20px 20px 20px 0;
+}
+
+/* Celular: el afiche arriba y los datos debajo */
+@media (max-width: 600px) {
+    .estreno {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .estreno img {
+        width: 100%;
+    }
+
+    .estreno .info-pelicula {
+        padding: 16px;
     }
 }
