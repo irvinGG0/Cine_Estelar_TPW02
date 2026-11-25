@@ -79,17 +79,34 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        // Mensaje: la caja crece sola según el texto
+        const campoMensaje = document.getElementById('mensaje');
+        if (campoMensaje) {
+            const ajustarAltura = function () {
+                campoMensaje.style.height = 'auto'; // primero se encoge...
+                // ...y luego toma la altura real del texto (más el borde)
+                campoMensaje.style.height =
+                    (campoMensaje.scrollHeight + campoMensaje.offsetHeight - campoMensaje.clientHeight) + 'px';
+            };
+            campoMensaje.addEventListener('input', ajustarAltura);
+            // Al limpiar el formulario, vuelve a su tamaño inicial
+            formulario.addEventListener('reset', function () {
+                setTimeout(ajustarAltura, 0);
+            });
+            ajustarAltura();
+        }
+
         formulario.addEventListener('submit', function (e) {
             e.preventDefault(); // ⚠️ Esto es clave: evita que recargue la página
 
             // Obtener valores
             const nombre = document.getElementById('nombre')?.value.trim();
             const correo = document.getElementById('correo')?.value.trim();
-            const asunto = document.getElementById('asunto')?.value;
+            const asunto = document.getElementById('asunto')?.value.trim();
             const mensaje = document.getElementById('mensaje')?.value.trim();
 
             // Validaciones
-            if (!nombre || !correo || !mensaje) {
+            if (!nombre || !correo || !asunto || !mensaje) {
                 alert('⚠️ Completa todos los campos obligatorios por favor.');
                 return;
             }
@@ -106,17 +123,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Mensaje según el asunto
+            // Mensaje según lo que escribió en el asunto
+            const asuntoMin = asunto.toLowerCase();
             let mensajeExito = '';
-            switch (asunto) {
-                case 'reclamo':
-                    mensajeExito = `✅ Estimado/a ${nombre},\nHemos recibido tu reclamo. Lo revisaremos con atención y te responderemos en un máximo de 48 horas. Gracias por ayudarnos a mejorar.`;
-                    break;
-                case 'sugerencia':
-                    mensajeExito = `✅ ¡Gracias ${nombre} por tu sugerencia! 🎉 La tomaremos en cuenta para seguir mejorando nuestro servicio.`;
-                    break;
-                default:
-                    mensajeExito = `✅ ¡Mensaje enviado, ${nombre}!\nHemos recibido tu ${asunto}. Te responderemos pronto a ${correo}`;
+            if (asuntoMin.includes('reclamo')) {
+                mensajeExito = `✅ Estimado/a ${nombre},\nHemos recibido tu reclamo. Lo revisaremos con atención y te responderemos en un máximo de 48 horas. Gracias por ayudarnos a mejorar.`;
+            } else if (asuntoMin.includes('sugerencia')) {
+                mensajeExito = `✅ ¡Gracias ${nombre} por tu sugerencia! 🎉 La tomaremos en cuenta para seguir mejorando nuestro servicio.`;
+            } else {
+                mensajeExito = `✅ ¡Mensaje enviado, ${nombre}!\nHemos recibido tu mensaje sobre "${asunto}". Te responderemos pronto a ${correo}`;
             }
 
             // Mostrar mensaje
@@ -129,26 +144,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===== 5. Botón "Volver arriba" =====
     const botonArriba = document.createElement('button');
+    botonArriba.type = 'button';
     botonArriba.textContent = '⬆️ Subir';
-    botonArriba.style.cssText = `
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background: #e94560;
-        color: white;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 50px;
-        cursor: pointer;
-        font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.3s;
-        z-index: 1000;
-    `;
+    botonArriba.className = 'boton-subir';      // los estilos están en estilos.css
+    botonArriba.setAttribute('aria-label', 'Volver arriba');
     document.body.appendChild(botonArriba);
 
     window.addEventListener('scroll', function () {
-        botonArriba.style.opacity = window.scrollY > 300 ? '1' : '0';
+        // aparece al bajar más de 300 px
+        botonArriba.classList.toggle('visible', window.scrollY > 300);
     });
 
     botonArriba.addEventListener('click', function () {

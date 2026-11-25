@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Precios y Promociones — Cine Estelar</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" type="image/png" href="cine/favicon.png">
     <meta name="color-scheme" content="only light">
 </head>
-
 <body>
     <header>
-        <h1><a class="marca" href="index.html"><img src="cine/estrellaLOGO.png" alt="Logo de Cine Estelar"><span>CINE
-                    ESTELAR</span></a></h1>
+        <h1><a class="marca" href="index.html"><img src="cine/estrellaLOGO.png" alt="Logo de Cine Estelar"><span>CINE ESTELAR</span></a></h1>
         <p>Entradas, confitería y ofertas especiales</p>
         <nav>
             <a href="index.html">Inicio</a>
@@ -56,8 +54,10 @@
             </div>
         </section>
 
-        <section>
+        <section class="confiteria">
             <h2>🍿 Confitería</h2>
+
+            <h3>Productos individuales</h3>
             <div class="tabla-responsive">
                 <table>
                     <tr>
@@ -76,11 +76,66 @@
                         <td>Refresco</td>
                         <td>S/ 5.00</td>
                     </tr>
-                    <tr>
-                        <td>Combo Pareja</td>
-                        <td>S/ 25.00</td>
-                    </tr>
                 </table>
+            </div>
+
+            <h3>Combos</h3>
+            <!--  COMBOSSSS -->
+            <div class="combos">
+            <article class="combo">
+                    <img src="cine/confiteria/canchaCHICA.jpg" alt="Canchita y gaseosa chica" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Canchita y gaseosa chica</h3>
+                        <p class="precio">S/10.00</p>
+                    </div>
+                </article>
+            <article class="combo">
+                    <img src="cine/confiteria/canchaMEDIANA.jpg" alt="Canchita y gaseosa mediana" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Canchita y gaseosa mediana</h3>
+                        <p class="precio">S/20.00</p>
+                    </div>
+                </article>
+            <article class="combo">
+                    <img src="cine/confiteria/comboGRANDE.jpg" alt="Canchita y gaseosa grande" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Canchita y gaseosa grande</h3>
+                        <p class="precio">S/35.00</p>
+                    </div>
+                </article>
+            <article class="combo">
+                    <img src="cine/confiteria/comboPERSONAL.jpg" alt="Combo personal grande" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Combo personal grande</h3>
+                        <p class="precio">S/37.00</p>
+                    </div>
+                </article>
+            <article class="combo">
+                    <img src="cine/confiteria/comboDUO.jpg" alt="Combo dúo: 2 canchitas grandes y 2 gaseosas grandes" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Combo dúo</h3>
+                        <p>2 canchas grandes + 2 gaseosas grandes</p>
+                        <p class="precio">S/73.00</p>
+                    </div>
+                </article>
+            <article class="combo">
+                    <img src="cine/confiteria/comboPAREJA.jpg" alt="Combo pareja: 1 canchita grande y 2 gaseosas medianas" loading="lazy">
+                    <div class="info-combo">
+                        <h3>Combo pareja</h3>
+                        <p>1 cancha grande + 2 gaseosas medianas</p>
+                        <p class="precio">S/56.00</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Coleccionable-->
+            <div class="coleccionable">
+                <img src="cine/confiteria/doomBARRIL.png" alt="Coleccionable de Cine Estelar" loading="lazy">
+                <div class="info-combo">
+                    <h3>🤖 Coleccionable: BARRIL DOOM</h3>
+                    <p>Consulta disponibilidad en confitería.</p>
+                    <p class="precio">S/359.90</p>
+                </div>
             </div>
         </section>
 
@@ -88,8 +143,7 @@
             <h2>✨ Promociones Vigentes</h2>
             <article class="promocion-destacada">
                 <h3>🔥 Martes de Ofertas — 2x1 en entradas</h3>
-                <p>Todos los martes compra una entrada y lleva la segunda gratis. Válido para funciones antes de las
-                    20:00.</p>
+                <p>Todos los martes compra una entrada y lleva la segunda gratis. Válido para funciones antes de las 20:00.</p>
             </article>
             <article class="promocion-destacada">
                 <h3>🎓 Día del Estudiante — 20% descuento</h3>
@@ -104,23 +158,13 @@
 
     <footer>
         <div class="contenido-pie">
-            <div>
-                <h4>📍 Ubicación</h4>
-                <p>Av. Principal 123 — Lima, Perú</p>
-            </div>
-            <div>
-                <h4>🕐 Horarios</h4>
-                <p>Lun-Dom: 14:00 — 23:00</p>
-            </div>
-            <div>
-                <h4>📞 Contacto</h4>
-                <p>987 654 321 | contacto@cineestelar.pe</p>
-            </div>
+            <div><h4>📍 Ubicación</h4><p>Av. Principal 123 — Lima, Perú</p></div>
+            <div><h4>🕐 Horarios</h4><p>Lun-Dom: 14:00 — 23:00</p></div>
+            <div><h4>📞 Contacto</h4><p>987 654 321 | contacto@cineestelar.pe</p></div>
         </div>
         <p class="derechos">&copy; 2026 Cine Estelar — Todos los derechos reservados</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>

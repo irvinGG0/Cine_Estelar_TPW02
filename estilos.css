@@ -764,7 +764,7 @@ main.inicio .bienvenida {
 .marca img {
     display: block;
     width: auto;
-    height: 45px;
+    height: 48px;
     /* cambia este valor para agrandar o achicar el logo */
     max-width: none;
     margin: 0;
@@ -836,5 +836,154 @@ main.inicio .bienvenida {
 
     .estreno .info-pelicula {
         padding: 16px;
+    }
+}
+
+
+/* ===== CAJA DE MENSAJE: sin redimensionar a mano, crece sola con el texto ===== */
+textarea {
+    resize: none;
+    /* quita la esquina para arrastrar */
+    overflow: hidden;
+    /* sin barra de desplazamiento: el JS la agranda */
+}
+
+
+/* ===== PRECIOS: CONFITERIA (combos con imagen) ===== */
+.confiteria h3 {
+    margin: 22px 0 12px;
+}
+
+/* 2 filas de 3 tarjetas */
+.combos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.combo {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    border-left: 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.combo img {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    aspect-ratio: 704 / 768;
+    /* medida de tus imagenes */
+    object-fit: cover;
+}
+
+.info-combo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 14px 16px 18px;
+}
+
+.info-combo h3 {
+    margin: 0 0 6px;
+}
+
+.info-combo p {
+    margin-bottom: 6px;
+}
+
+.info-combo .precio {
+    margin-top: auto;
+    /* el precio queda siempre abajo */
+    margin-bottom: 0;
+    color: #d6304a;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+/* Coleccionable: ancho completo, al final */
+.coleccionable {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+    background-color: #fffbea;
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+}
+
+.coleccionable img {
+    flex-shrink: 0;
+    width: 240px;
+    max-width: 100%;
+    margin: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .combos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .coleccionable {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .combos {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ===== BOTON SUBIR ===== */
+.boton-subir {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* lo centra  */
+    width: auto;
+    /* anula el width:100% de los botones en celular */
+    margin: 0;
+    padding: 10px 20px;
+    background-color: #271e6f;
+    color: #ffffff;
+    border-radius: 45px;
+    opacity: 0;
+    pointer-events: none;
+    /* oculto: no estorba los clics */
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+.boton-subir.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.boton-subir:hover {
+    background-color: #d6304a;
+    transform: translateX(-50%) translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .boton-subir {
+        bottom: 14px;
+        width: auto;
+        margin: 0;
+        padding: 8px 16px;
+        font-size: 0.9em;
     }
 }
